@@ -13,7 +13,7 @@ Tcl, JavaScript and PHP programs. This is done by wrapping the script in an
 with a slim app binary that runs the script.
 
 Platypus makes it easy to share scripts and programs with people who are 
-unfamiliar with the command line interface. Native, user-fiendly 
+unfamiliar with the command line interface. Native, user-friendly 
 applications can be created with a few clicks. It is very easy to 
 create installers, droplets, administrative applications, login items, 
 status menu items, launchers and automations using Platypus.
