@@ -9,7 +9,7 @@ import subprocess
 import plistlib
 
 
-CLT_BINARY = os.path.dirname(os.path.realpath(__file__)) + "/platypus"
+CLT_BINARY = f"{os.path.dirname(os.path.realpath(__file__))}/platypus"
 
 
 def profile_plist_for_args(args):
@@ -23,7 +23,7 @@ def profile_plist_for_args(args):
 def create_app_with_args(args, name="MyApp"):
     pnargs = [CLT_BINARY]
     pnargs.extend(args)
-    pnargs.extend(["--overwrite", "--name", name, "args.py", name + ".app"])
+    pnargs.extend(["--overwrite", "--name", name, "args.py", f"{name}.app"])
     with open(os.devnull, "w") as devnull:
         out = subprocess.check_output(pnargs, stderr=devnull)
     return "MyApp.app"
@@ -35,7 +35,7 @@ def create_profile_with_args(args, name="dummy.profile"):
 
 def run_app(name="MyApp", args=[]):
     with open(os.devnull, "w") as devnull:
-        cmd = ["./" + name + ".app/Contents/MacOS/" + name]
+        cmd = [f"./{name}.app/Contents/MacOS/{name}"]
         cmd.extend(args)
         out = subprocess.check_output(cmd, stderr=devnull)
     with open("args.txt", "r") as f:
@@ -156,19 +156,19 @@ print("Verifying app directory structure and permissions")
 app_path = create_app_with_args(["-R"])
 
 files = [
-    app_path + "/",
-    app_path + "/Contents",
-    app_path + "/Contents/Info.plist",
-    app_path + "/Contents/MacOS",
-    app_path + "/Contents/MacOS/MyApp",
-    app_path + "/Contents/Resources",
-    app_path + "/Contents/Resources/AppSettings.plist",
-    app_path + "/Contents/Resources/MainMenu.nib",
-    app_path + "/Contents/Resources/script",
+    f"{app_path}/",
+    f"{app_path}/Contents",
+    f"{app_path}/Contents/Info.plist",
+    f"{app_path}/Contents/MacOS",
+    f"{app_path}/Contents/MacOS/MyApp",
+    f"{app_path}/Contents/Resources",
+    f"{app_path}/Contents/Resources/AppSettings.plist",
+    f"{app_path}/Contents/Resources/MainMenu.nib",
+    f"{app_path}/Contents/Resources/script",
 ]
 
 for p in files:
-    print("Verifying existence of " + p)
+    print(f"Verifying existence of {p}")
     assert os.path.exists(p)
 
 assert os.access(files[4], os.X_OK)  # app binary
